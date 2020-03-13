@@ -1,0 +1,43 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<beans xmlns="http://www.springframework.org/schema/beans"
+	xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+	xsi:schemaLocation="http://www.springframework.org/schema/beans   http://www.springframework.org/schema/beans/spring-beans.xsd">
+
+	<!-- 配置自定义属性 -->
+	<bean id="processEngineConfiguration"
+		class="org.activiti.engine.impl.cfg.StandaloneInMemProcessEngineConfiguration">
+		<!-- 给引擎设置自定义的commandInvoker -->
+        <property name="commandInvoker" ref="commandInvoker" />
+        <!-- 若为true则开启记录事件、节点的状态，完成后将完成状态插入数据库，若为false则关闭，不记录 -->
+        <property name="enableDatabaseEventLogging" value="false"/>
+        
+		<!-- <property name="jdbcUrl" value="jdbc:mysql://192.168.153.3:3306/activiti" />
+		<property name="jdbcDriver" value="com.mysql.jdbc.Driver" />
+		<property name="jdbcUsername" value="root" />
+		<property name="jdbcPassword" value="mysql" />
+		<property name="databaseSchemaUpdate" value="drop-create"></property> -->
+		
+		<property name="jdbcUrl" value="jdbc:h2:mem:activiti" />
+		<property name="jdbcDriver" value="org.h2.Driver" />
+		<property name="jdbcUsername" value="sa" />
+		<property name="jdbcPassword" value="" />
+		<property name="databaseSchemaUpdate" value="true"></property>
+		<property name="customPreCommandInterceptors">
+			<list>
+				<bean class="com.guojc.activiti.designPatterns.customInterceptor.configuration.BeforeCommandInceptor"></bean>
+			</list>
+		</property>
+		<property name="customPostCommandInterceptors">
+			<list>
+				<!-- 配置上时长拦截器 -->
+				<bean class="com.guojc.activiti.designPatterns.customInterceptor.configuration.DuartionCommandInceptor" />
+			</list>
+		</property>
+	</bean>
+
+	<bean id="commandInvoker"
+		class="com.guojc.activiti.designPatterns.customInterceptor.configuration.MDCCommandInvoker" />
+
+
+</beans>

@@ -1,0 +1,30 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<configuration scan="true" scanPeriod="60 seconds">
+	<!--日志输入到控制台 -->
+	<appender name="STDOUT" class="ch.qos.logback.core.ConsoleAppender">
+		<encoder>
+			<pattern>%msg%n</pattern>
+		</encoder>
+	</appender>
+
+
+
+
+	<!--需要将日志单独输出的包路径 -->
+	<logger name="com.guojc" level="DEBUG" additivity="false">
+		<appender-ref ref="STDOUT" />
+	</logger>
+
+	<!--需要将日志单独输出的包路径 -->
+	<logger name="org.activiti" level="INFO" additivity="false">
+		<appender-ref ref="STDOUT" />
+	</logger>
+
+
+	<!-- 日志输出级别 -->
+	<root level="INFO">
+		<appender-ref ref="STDOUT" />
+	</root>
+
+
+</configuration>

@@ -1,0 +1,17 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<beans xmlns="http://www.springframework.org/schema/beans"
+	xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+	xsi:schemaLocation="http://www.springframework.org/schema/beans   http://www.springframework.org/schema/beans/spring-beans.xsd">
+
+	<!-- 配置自定义属性 -->
+	<bean id="processEngineConfiguration" class="com.guojc.activiti.config.customConfig.MyConfiguration">
+		<property name="jdbcUrl" value="jdbc:mysql://192.168.153.3:3306/activiti" />
+		<property name="jdbcDriver" value="com.mysql.jdbc.Driver" />
+		<property name="jdbcUsername" value="root" />
+		<property name="jdbcPassword" value="mysql" />
+		<property name="databaseSchemaUpdate" value="true" />
+		<property name="userName" value="crazyit"></property>
+	</bean>
+
+</beans>
