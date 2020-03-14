@@ -21,10 +21,15 @@
 	</logger>
 
 
+<!--需要将日志单独输出的包路径 -->
+	<logger name="org.activiti.engine.impl.persistence.entity" level="trace" additivity="false">
+		<appender-ref ref="STDOUT" />
+	</logger>
+
+
 	<!-- 日志输出级别 -->
 	<root level="INFO">
 		<appender-ref ref="STDOUT" />
 	</root>
-
 
 </configuration>
